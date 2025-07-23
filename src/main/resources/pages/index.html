@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmonersene</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/loginRegisterModal.css">
+    <link rel="stylesheet" href="/css/tag.css">
+<style>
+
+
+   
+
+</style>
+
+</head>
+<body>
+ 
+    <nav class="navbar navbar-expand-lg navbar-light navbar-gradient fixed-top" id="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/"><i class="bi bi-film"></i> filmonersene.com</a>
+    
+    
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class=""><i class="fa-solid fa-bars" style="color: #ffffff;"></i></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="/tum-filmler">Tüm Filmler</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#">En Çok Beğenilenler</a>
+        </li>
+      </ul>
+      <form class="d-flex align-items-center mt-2">
+        <input class="form-control me-5 bg-dark text-white rounded-pill search-input" type="search" placeholder="Film Ara..." aria-label="Search">
+      </form>
+      
+      <div class="d-flex align-items-center mt-2" id="authButtons">
+        <button class="btn btn-outline-light me-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#authModal" data-tab="login" id="login">Giriş Yap</button>
+        <button class="btn btn-outline-light rounded-pill" data-bs-toggle="modal" data-bs-target="#authModal" data-tab="register" id="register">Üye Ol</button>
+      </div>
+      
+    </div>
+    
+    
+    
+    
+    
+  </div>
+</nav>
+
+
+
+
+
+<section class="hero-section d-flex justify-content-center align-items-center text-white">
+    <div class="text-center">
+      <h1 class="display-4 fw-bold">En İyi Film Önerileri</h1>
+      <p>Topluluk tarafından önerilen en iyi filmleri keşfedin ve kendi önerilerinizi paylaşın</p>
+      <a href="#latest-movies" class="btn btn-lg rounded-pill px-3 py-2 mt-3 btnBrowse text-white">
+        <i class="bi bi-play-fill me-2"></i>
+        Şimdi Gözat
+        
+      </a>
+
+      <button class="btn btn-lg rounded-pill px-4 py-2 mt-3 btnBrowse text-white" id="filmOnerBtn">
+        <i class="bi bi-file-plus me-2"></i>
+        Film Öner
+        
+      </button>
+
+    </div>
+  </section>
+
+
+  <section class="latest-movies pb-5" id="latest-movies">
+    <div class="container">
+        <h1>Son Eklenen Filmler</h1>
+        <div class="movies-grid row g-3 mt-2 align-items-stretch">
+
+            <div class="col-lg-3">
+                <div class="card movie-card">
+                    <div class="card-img-wrapper">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg" class="card-img-top" alt="Inception">
+                    <!-- Sağ üst liste butonu -->
+                    <button class="btn-add-list">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                    <!-- Sol üst puan -->
+                    <div class="movie-rating">
+                        <i class="bi bi-star-fill"></i>
+                        <span>8.8</span>
+                    </div>
+                    </div>
+    
+            <div class="card-body">
+                <h5 class="card-title text-white fw-bold">Inception</h5>
+                
+                <!-- Tür badge'leri -->
+                <div class="movie-genres mb-2">
+                    <span class="badge bg-primary">Aksiyon</span>
+                    <span class="badge bg-secondary">Macera</span>
+                </div>
+                
+                <!-- Öneren kişi -->
+                <div class="recommended-by mb-2">
+                    <small class="text-muted">
+                    <i class="bi bi-person-circle"></i>
+                    Öneren: <span class="text-white">Emre Can</span>
+                    <span class="badge bg-danger ms-1">Site Yöneticisi</span>
+                    </small>
+                </div>
+                
+                <!-- İstatistikler -->
+                <div class="movie-stats">
+                    <!-- Normal durumdaki istatistikler -->
+                    <div class="stats-content pt-2">
+                        <div class="d-flex justify-content-between text-muted small">
+                        <span>
+                            <i class="bi bi-eye"></i> 1.2K görüntüleme
+                        </span>
+                        <span>
+                            <i class="bi bi-chat"></i> 45 yorum
+                        </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hover durumunda çıkacak butonlar -->
+                    <div class="like-dislike-buttons">
+                        <button class="btn-like" onclick="toggleLike(this)">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        <span class="like-count">124</span>
+                        </button>
+                        <button class="btn-dislike" onclick="toggleDislike(this)">
+                        <i class="bi bi-hand-thumbs-down"></i>
+                        <span class="dislike-count">8</span>
+                        </button>
+                    </div>
+                </div>
+        </div>
+  </div>
+</div>
+
+
+<div class="col-lg-3">
+  <div class="card movie-card">
+    <div class="card-img-wrapper">
+      <img src="https://m.media-amazon.com/images/S/pv-target-images/63d68cc3ccaff470bb46e3970d948c6d9ce6cf10dfd1267ed2b3aa701b3b2432.png" class="card-img-top" alt="Inception">
+      <!-- Sağ üst liste butonu -->
+      <button class="btn-add-list">
+        <i class="bi bi-plus"></i>
+      </button>
+      <!-- Sol üst puan -->
+      <div class="movie-rating">
+        <i class="bi bi-star-fill"></i>
+        <span>8.8</span>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <h5 class="card-title text-white fw-bold">The Sixth Sense</h5>
+      
+      <!-- Tür badge'leri -->
+      <div class="movie-genres mb-2">
+        <span class="badge bg-primary">Gizem</span>
+        <span class="badge bg-secondary">Gerilim</span>
+      </div>
+      
+      <!-- Öneren kişi -->
+      <div class="recommended-by mb-2">
+        <small class="text-muted">
+          <i class="bi bi-person-circle"></i>
+          Öneren: <span class="text-white">Furkan Can</span>
+          <span class="badge bg-warning ms-1">Editör</span>
+        </small>
+      </div>
+      
+      
+      <!-- İstatistikler -->
+      <div class="movie-stats">
+        <!-- Normal durumdaki istatistikler -->
+        <div class="stats-content pt-2">
+            <div class="d-flex justify-content-between text-muted small">
+            <span>
+                <i class="bi bi-eye"></i> 1.2K görüntüleme
+            </span>
+            <span>
+                <i class="bi bi-chat"></i> 45 yorum
+            </span>
+            </div>
+        </div>
+        
+        <!-- Hover durumunda çıkacak butonlar -->
+        <div class="like-dislike-buttons">
+            <button class="btn-like" onclick="toggleLike(this)">
+            <i class="bi bi-hand-thumbs-up"></i>
+            <span class="like-count">124</span>
+            </button>
+            <button class="btn-dislike" onclick="toggleDislike(this)">
+            <i class="bi bi-hand-thumbs-down"></i>
+            <span class="dislike-count">8</span>
+            </button>
+        </div>
+        </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="col-lg-3">
+  <div class="card movie-card">
+    <div class="card-img-wrapper">
+      <img src="https://m.media-amazon.com/images/M/MV5BYjIyNDExOWItM2Y4ZC00NmY3LWFlN2ItYTJlZDQ1NTJlZTUwXkEyXkFqcGc@._V1_SX300.jpg" class="card-img-top" alt="The Curious Case of Benjamin Button">
+      <!-- Sağ üst liste butonu -->
+      <button class="btn-add-list">
+        <i class="bi bi-plus"></i>
+      </button>
+      <!-- Sol üst puan -->
+      <div class="movie-rating">
+        <i class="bi bi-star-fill"></i>
+        <span>7.8</span>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <h5 class="card-title text-white fw-bold">The Curious Case of Benjamin Button</h5>
+      
+      <!-- Tür badge'leri -->
+      <div class="movie-genres mb-2">
+        <span class="badge bg-primary">Aksiyon</span>
+        <span class="badge bg-secondary">Macera</span>
+      </div>
+      
+      <!-- Öneren kişi -->
+      <div class="recommended-by mb-2">
+        <small class="text-muted">
+          <i class="bi bi-person-circle"></i>
+          Öneren: <span class="text-white">Emre Can</span>
+          <span class="badge bg-warning ms-1">Site Yöneticisi</span>
+        </small>
+      </div>
+      
+      
+      <!-- İstatistikler -->
+      <div class="movie-stats">
+        <!-- Normal durumdaki istatistikler -->
+        <div class="stats-content pt-2">
+            <div class="d-flex justify-content-between text-muted small">
+            <span>
+                <i class="bi bi-eye"></i> 1.2K görüntüleme
+            </span>
+            <span>
+                <i class="bi bi-chat"></i> 45 yorum
+            </span>
+            </div>
+        </div>
+        
+        <!-- Hover durumunda çıkacak butonlar -->
+        <div class="like-dislike-buttons">
+            <button class="btn-like" onclick="toggleLike(this)">
+            <i class="bi bi-hand-thumbs-up"></i>
+            <span class="like-count">124</span>
+            </button>
+            <button class="btn-dislike" onclick="toggleDislike(this)">
+            <i class="bi bi-hand-thumbs-down"></i>
+            <span class="dislike-count">8</span>
+            </button>
+        </div>
+        </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="col-lg-3">
+  <div class="card movie-card">
+    <div class="card-img-wrapper">
+      <img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg" class="card-img-top" alt="Inception">
+      <!-- Sağ üst liste butonu -->
+      <button class="btn-add-list">
+        <i class="bi bi-plus"></i>
+      </button>
+      <!-- Sol üst puan -->
+      <div class="movie-rating">
+        <i class="bi bi-star-fill"></i>
+        <span>8.8</span>
+      </div>
+    </div>
+
+    
+    
+    <div class="card-body">
+      <h5 class="card-title text-white fw-bold">Inception (2010)</h5>
+
+      
+      
+      <!-- Tür badge'leri -->
+      <div class="movie-genres mb-2">
+        <span class="badge bg-primary">Aksiyon</span>
+        <span class="badge bg-secondary">Macera</span>
+      </div>
+      
+      <!-- Öneren kişi -->
+      <div class="recommended-by mb-2">
+        <small class="text-muted">
+          <i class="bi bi-person-circle"></i>
+          Öneren: <span class="text-white">Emre Can</span>
+          <span class="badge bg-warning ms-1">Site Yöneticisi</span>
+        </small>
+      </div>
+      
+      <!-- İstatistikler -->
+      <div class="movie-stats">
+        <!-- Normal durumdaki istatistikler -->
+        <div class="stats-content pt-2">
+            <div class="d-flex justify-content-between text-muted small">
+            <span>
+                <i class="bi bi-eye"></i> 1.2K görüntüleme
+            </span>
+            <span>
+                <i class="bi bi-chat"></i> 45 yorum
+            </span>
+            </div>
+        </div>
+        
+        <!-- Hover durumunda çıkacak butonlar -->
+        <div class="like-dislike-buttons">
+            <button class="btn-like" onclick="toggleLike(this)">
+            <i class="bi bi-hand-thumbs-up"></i>
+            <span class="like-count">124</span>
+            </button>
+            <button class="btn-dislike" onclick="toggleDislike(this)">
+            <i class="bi bi-hand-thumbs-down"></i>
+            <span class="dislike-count">8</span>
+            </button>
+        </div>
+        </div>
+
+
+
+    </div>
+  </div>
+</div>
+         
+        </div>
+    </div>
+
+  </section>
+
+
+ <!-- MOST LIKED MOVIES SECTION-->
+
+  <section class="most-liked-movies">
+    <div class="container">
+        <h1>En Çok Beğenilenler</h1>
+
+        <div class="liked-movies-grid row g-3 mt-2">
+            
+        <div class="col-lg-3">
+            <div class="card movie-card">
+                <div class="card-img-wrapper">
+                <img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg" class="card-img-top" alt="Inception">
+                <!-- Sağ üst liste butonu -->
+                <button class="btn-add-list">
+                    <i class="bi bi-plus"></i>
+                </button>
+                <!-- Sol üst puan -->
+                <div class="movie-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <span>8.8</span>
+                </div>
+                </div>
+                
+                <div class="card-body">
+                <h5 class="card-title text-white fw-bold">Inception (2010)</h5>
+                
+                <!-- Tür badge'leri -->
+                <div class="movie-genres mb-2">
+                    <span class="badge bg-primary">Aksiyon</span>
+                    <span class="badge bg-secondary">Macera</span>
+                </div>
+                
+                <!-- Öneren kişi -->
+                <div class="recommended-by mb-2">
+                    <small class="text-muted">
+                    <i class="bi bi-person-circle"></i>
+                    Öneren: <span class="text-white">Emre Can</span>
+                    <span class="badge bg-warning ms-1">Site Yöneticisi</span>
+                    </small>
+                </div>
+                
+                
+                <!-- İstatistikler -->
+                <div class="movie-stats">
+                    <!-- Normal durumdaki istatistikler -->
+                    <div class="stats-content pt-2">
+                        <div class="d-flex justify-content-between text-muted small">
+                        <span>
+                            <i class="bi bi-eye"></i> 1.2K görüntüleme
+                        </span>
+                        <span>
+                            <i class="bi bi-chat"></i> 45 yorum
+                        </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hover durumunda çıkacak butonlar -->
+                    <div class="like-dislike-buttons">
+                        <button class="btn-like" onclick="toggleLike(this)">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        <span class="like-count">124</span>
+                        </button>
+                        <button class="btn-dislike" onclick="toggleDislike(this)">
+                        <i class="bi bi-hand-thumbs-down"></i>
+                        <span class="dislike-count">8</span>
+                        </button>
+                    </div>
+                    </div>
+
+
+                </div>
+        </div>
+</div>
+
+
+<div class="col-lg-3">
+            <div class="card movie-card">
+                <div class="card-img-wrapper">
+                <img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg" class="card-img-top" alt="Inception">
+                <!-- Sağ üst liste butonu -->
+                <button class="btn-add-list">
+                    <i class="bi bi-plus"></i>
+                </button>
+                <!-- Sol üst puan -->
+                <div class="movie-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <span>8.8</span>
+                </div>
+                </div>
+                
+                <div class="card-body">
+                <h5 class="card-title text-white fw-bold">Inception (2010)</h5>
+                
+                <!-- Tür badge'leri -->
+                <div class="movie-genres mb-2">
+                    <span class="badge bg-primary">Aksiyon</span>
+                    <span class="badge bg-secondary">Macera</span>
+                </div>
+                
+                <!-- Öneren kişi -->
+                <div class="recommended-by mb-2">
+                    <small class="text-muted">
+                    <i class="bi bi-person-circle"></i>
+                    Öneren: <span class="text-white">Emre Can</span>
+                    <span class="badge bg-warning ms-1">Site Yöneticisi</span>
+                    </small>
+                </div>
+                
+                
+                <!-- İstatistikler -->
+                <div class="movie-stats">
+                    <!-- Normal durumdaki istatistikler -->
+                    <div class="stats-content pt-2">
+                        <div class="d-flex justify-content-between text-muted small">
+                        <span>
+                            <i class="bi bi-eye"></i> 1.2K görüntüleme
+                        </span>
+                        <span>
+                            <i class="bi bi-chat"></i> 45 yorum
+                        </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hover durumunda çıkacak butonlar -->
+                    <div class="like-dislike-buttons">
+                        <button class="btn-like" onclick="toggleLike(this)">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        <span class="like-count">124</span>
+                        </button>
+                        <button class="btn-dislike" onclick="toggleDislike(this)">
+                        <i class="bi bi-hand-thumbs-down"></i>
+                        <span class="dislike-count">8</span>
+                        </button>
+                    </div>
+                    </div>
+
+
+                </div>
+        </div>
+</div>
+
+
+<div class="col-lg-3">
+            <div class="card movie-card">
+                <div class="card-img-wrapper">
+                <img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg" class="card-img-top" alt="Inception">
+                <!-- Sağ üst liste butonu -->
+                <button class="btn-add-list">
+                    <i class="bi bi-plus"></i>
+                </button>
+                <!-- Sol üst puan -->
+                <div class="movie-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <span>8.8</span>
+                </div>
+                </div>
+                
+                <div class="card-body">
+                <h5 class="card-title text-white fw-bold">Inception (2010)</h5>
+                
+                <!-- Tür badge'leri -->
+                <div class="movie-genres mb-2">
+                    <span class="badge bg-primary">Aksiyon</span>
+                    <span class="badge bg-secondary">Macera</span>
+                </div>
+                
+                <!-- Öneren kişi -->
+                <div class="recommended-by mb-2">
+                    <small class="text-muted">
+                    <i class="bi bi-person-circle"></i>
+                    Öneren: <span class="text-white">Emre Can</span>
+                    <span class="badge bg-warning ms-1">Site Yöneticisi</span>
+                    </small>
+                </div>
+                
+                
+                <!-- İstatistikler -->
+                <div class="movie-stats">
+                    <!-- Normal durumdaki istatistikler -->
+                    <div class="stats-content pt-2">
+                        <div class="d-flex justify-content-between text-muted small">
+                        <span>
+                            <i class="bi bi-eye"></i> 1.2K görüntüleme
+                        </span>
+                        <span>
+                            <i class="bi bi-chat"></i> 45 yorum
+                        </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hover durumunda çıkacak butonlar -->
+                    <div class="like-dislike-buttons">
+                        <button class="btn-like" onclick="toggleLike(this)">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        <span class="like-count">124</span>
+                        </button>
+                        <button class="btn-dislike" onclick="toggleDislike(this)">
+                        <i class="bi bi-hand-thumbs-down"></i>
+                        <span class="dislike-count">8</span>
+                        </button>
+                    </div>
+                    </div>
+
+
+                </div>
+        </div>
+</div>
+
+
+<div class="col-lg-3">
+            <div class="card movie-card">
+                <div class="card-img-wrapper">
+                <img src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg" class="card-img-top" alt="Inception">
+                <!-- Sağ üst liste butonu -->
+                <button class="btn-add-list">
+                    <i class="bi bi-plus"></i>
+                </button>
+                <!-- Sol üst puan -->
+                <div class="movie-rating">
+                    <i class="bi bi-star-fill"></i>
+                    <span>8.8</span>
+                </div>
+                </div>
+                
+                <div class="card-body">
+                <h5 class="card-title text-white fw-bold">Inception (2010)</h5>
+                
+                <!-- Tür badge'leri -->
+                <div class="movie-genres mb-2">
+                    <span class="badge bg-primary">Aksiyon</span>
+                    <span class="badge bg-secondary">Macera</span>
+                </div>
+                
+                <!-- Öneren kişi -->
+                <div class="recommended-by mb-2">
+                    <small class="text-muted">
+                    <i class="bi bi-person-circle"></i>
+                    Öneren: <span class="text-white">Emre Can</span>
+                    <span class="badge bg-warning ms-1">Site Yöneticisi</span>
+                    </small>
+                </div>
+                
+                
+                <!-- İstatistikler -->
+                <div class="movie-stats">
+                    <!-- Normal durumdaki istatistikler -->
+                    <div class="stats-content pt-2">
+                        <div class="d-flex justify-content-between text-muted small">
+                        <span>
+                            <i class="bi bi-eye"></i> 1.2K görüntüleme
+                        </span>
+                        <span>
+                            <i class="bi bi-chat"></i> 45 yorum
+                        </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hover durumunda çıkacak butonlar -->
+                    <div class="like-dislike-buttons">
+                        <button class="btn-like" onclick="toggleLike(this)">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        <span class="like-count">124</span>
+                        </button>
+                        <button class="btn-dislike" onclick="toggleDislike(this)">
+                        <i class="bi bi-hand-thumbs-down"></i>
+                        <span class="dislike-count">8</span>
+                        </button>
+                    </div>
+                    </div>
+
+
+                </div>
+        </div>
+</div>
+
+
+
+
+        </div>
+    </div>
+</section>
+
+
+
+
+<footer class="footer mt-5">
+    <div class="container">
+            <p>&copy; 2025 CodeCrest. Tüm hakları saklıdır.</p>
+            <a href="/about">Hakkımızda</a> | <a href="/contact">İletişim</a>
+    </div>
+</footer>
+
+
+<!-- MODAL ADD MOVİE -->
+<div id="modalContainer"></div>
+
+ <!-- MODAL TESTTT -->
+
+
+  <!-- Login/Register Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                        <h5 class="modal-title" id="authModalLabel">
+                            <i class="fas fa-film me-2"></i>filmonersene.com
+                        </h5>
+                        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                </div>
+
+                    <div class="modal-body">
+                    <!-- Tab Navigation -->
+                    <ul class="nav nav-tabs justify-content-center" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">
+                                <i class="fas fa-sign-in-alt me-2"></i>Giriş Yap
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab">
+                                <i class="fas fa-user-plus me-2"></i>Kayıt Ol
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="authTabsContent">
+                        <!-- Login Tab -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel">
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">E-posta</label>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="ornek@email.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Şifre</label>
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Şifrenizi girin" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">
+                                        Beni hatırla
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-login">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Giriş Yap
+                                </button>
+                            </form>
+                            
+                            <div class="divider">
+                                <span>veya</span>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button class="btn social-btn">
+                                    <i class="fab fa-google"></i>
+                                </button>
+                                <button class="btn social-btn">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="btn social-btn">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="text-center mt-3">
+                                <a href="#" class="text-link">Şifremi unuttum</a>
+                            </div>
+                        </div>
+
+                        <!-- Register Tab -->
+                        <div class="tab-pane fade" id="register" role="tabpanel">
+                            <form id="registerForm">
+                                <div class="mb-3">
+                                    <label for="registerName" class="form-label">Ad</label>
+                                    <input type="text" class="form-control" id="registerName" minlength="2" maxlength="30" placeholder="Adınız" pattern="^[A-Za-zÇçĞğİıÖöŞşÜü]+$"
+  									title="Lütfen sadece harf giriniz. Boşluk kullanmayınız." required>
+                                    
+                                    <label for="registerSurname" class="form-label">Soyad</label>
+                                    <input type="text" class="form-control" id="registerSurname" minlength="2" maxlength="30" placeholder="Soyadınız" pattern="^[A-Za-zÇçĞğİıÖöŞşÜü]+$"
+  									title="Lütfen sadece harf giriniz. Boşluk kullanmayınız." required>
+                                </div>
+                                <div class="mb-3">
+                                	<label for="registerUsername" class="form-label">Kullanıcı Adı</label>
+                                    <input type="text" class="form-control" id="registerUsername" pattern="^[a-zA-Z0-9._]{3,15}$" title="Kullanıcı adı 3-15 karakter arası, sadece harf, rakam, nokta ve alt çizgi olabilir. Boşluk içeremez." placeholder="Kullanıcı Adı" required>
+                                    <label for="registerEmail" class="form-label">E-posta</label>
+                                    <input type="email" class="form-control" id="registerEmail" maxlength="254" placeholder="ornek@email.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPassword" class="form-label">Şifre</label>
+                                    <input type="password" class="form-control" id="registerPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}" title="Şifre en az 8 karakter, büyük harf, küçük harf, rakam ve özel karakter içermeli." placeholder="Güçlü bir şifre seçin" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="registerPasswordConfirm" class="form-label">Şifre Tekrar</label>
+                                    <input type="password" class="form-control" id="registerPasswordConfirm" placeholder="Şifrenizi tekrar girin" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="acceptTerms" required>
+                                    <label class="form-check-label" for="acceptTerms">
+                                        <a href="#" class="text-link">Kullanım koşulları</a>nı kabul ediyorum
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-login">
+                                    <i class="fas fa-user-plus me-2"></i>Kayıt Ol
+                                </button>
+                            </form>
+                            
+                            <div class="divider">
+                                <span>veya</span>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button class="btn social-btn">
+                                    <i class="fab fa-google"></i>
+                                </button>
+                                <button class="btn social-btn">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="btn social-btn">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<!-- config js -->
+	<script src="js/config.js"></script>
+    <!-- Api js -->
+     <script src="/js/movieCard.js"></script>
+    <script src="/js/api.js"></script>
+    <!-- jQuery (Modalı yüklemek için) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- BOOTSTRAP JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+        
+       
+        // film öner modal
+        $(document).ready(function() {
+            $("#modalContainer").load("/film-oner", function(response, status, xhr) {
+                if (status === "success") {
+                    console.log("Modal başarıyla yüklendi.");
+                    window.filmOneriSistemi = new FilmOneriSistemi(); // Modal yüklendikten sonra başlat
+                } else {
+                    console.error("Modal yüklenemedi:", status, xhr.status, xhr.statusText);
+                }
+            });
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const navbar = document.getElementById("navbar");
+        const targetSection = document.getElementById("latest-movies");
+
+        if (!navbar || !targetSection) {
+        console.warn("Navbar veya hedef section bulunamadı.");
+        return;
+        }
+
+        window.addEventListener("scroll", () => {
+        const sectionTop = targetSection.offsetTop;
+        const scrollY = window.scrollY;
+
+        if (scrollY >= sectionTop - 50) {
+            navbar.classList.add("navbar-colored");
+        } else {
+            navbar.classList.remove("navbar-colored");
+        }
+        });
+    });
+       
+
+    </script>
+    
+    
+
+
+</body>
+</html>

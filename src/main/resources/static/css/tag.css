@@ -1,0 +1,63 @@
+.tag-site-admini {
+    background: linear-gradient(90deg, #ff6b6b, #e74c3c, #c0392b, #a93226, #8b0000, #ff6b6b);
+    background-size: 300% 300%;
+    color: #ffffff;
+    animation: redGradientShift 3s ease-in-out infinite;
+}
+
+@keyframes redGradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.tag-yönetici {
+    background: linear-gradient(90deg, #ffd700, #ffed4e, #f39c12, #e67e22, #ffd700);
+    background-size: 300% 300%;
+    color: #000000;
+    animation: yellowGradientShift 5s ease-in-out infinite;
+}
+
+@keyframes yellowGradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.tag-film-uzmanı {
+    background: linear-gradient(90deg, #0dcaf0, #0ab0d6, #0891b2, #0d6efd, #0dcaf0);
+    background-size: 300% 300%;
+    color: #000000;
+    animation: blueGradientShift 4s ease-in-out infinite;
+}
+
+@keyframes blueGradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+	
+.tag-yeni-üye{
+	  background-color: #6c757d; /* gri */
+	  color: white;
+	}

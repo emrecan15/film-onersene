@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Profili - Filmonersene.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e91e63;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #e91e63;
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            color: #fff;
+            width: 200px;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .profile-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-details h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-details .username {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .profile-bio {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .like-ratio {
+            color: #4caf50;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .movie-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .movie-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #e91e63;
+        }
+
+        .movie-year {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .movie-description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .movie-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .like-dislike {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .like-btn, .dislike-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .like-btn {
+            color: #4caf50;
+        }
+
+        .dislike-btn {
+            color: #f44336;
+        }
+
+        .movie-date {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .floating-action {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .floating-action:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .profile-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .movies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">🎬 filmonersene.com</div>
+            <div class="nav-links">
+                <a href="#">Tüm Filmler</a>
+                <a href="#">En Çok Beğenilenler</a>
+            </div>
+            <input type="text" class="search-box" placeholder="Film Ara...">
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    AY
+                </div>
+                <div class="profile-details">
+                    <h1>Ahmet Yılmaz</h1>
+                    <div class="username">@ahmetyilmaz_sinema</div>
+                    <p class="profile-bio">
+                        Sinema tutkunu, özellikle bilim kurgu ve gerilim türlerinde uzmanım. 
+                        Her hafta yeni filmler izleyip toplulukla paylaşıyorum. Kaliteli sinema 
+                        deneyimi için doğru adrestesiniz! 🎬✨
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">1,247</div>
+                <div class="stat-label">Takipçi</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3,892</div>
+                <div class="stat-label">Toplam Beğeni</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">421</div>
+                <div class="stat-label">Dislike</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number like-ratio">90.2%</div>
+                <div class="stat-label">Beğeni Oranı</div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">
+                <div class="section-icon">🎭</div>
+                Önerdiği Filmler
+            </h2>
+            
+            <div class="movies-grid">
+                <div class="movie-card">
+                    <div class="movie-title">Dune: Part Two</div>
+                    <div class="movie-year">2024</div>
+                    <div class="movie-description">
+                        Denis Villeneuve'un muhteşem devam filmi. Görsel efektler, müzik ve oyunculuk 
+                        açısından sinema tarihinin en iyi bilim kurgu filmlerinden biri. Mutlaka izlenmeli!
+                    </div>
+                    <div class="movie-stats">
+                        <div class="like-dislike">
+                            <div class="like-btn">👍 234</div>
+                            <div class="dislike-btn">👎 12</div>
+                        </div>
+                        <div class="movie-date">2 gün önce</div>
+                    </div>
+                </div>
+
+                <div class="movie-card">
+                    <div class="movie-title">The Batman</div>
+                    <div class="movie-year">2022</div>
+                    <div class="movie-description">
+                        Robert Pattinson'ın Batman yorumu gerçekten etkileyici. Karanlık atmosfer, 
+                        güçlü hikaye ve mükemmel sinematografi ile unutulmaz bir deneyim sunuyor.
+                    </div>
+                    <div class="movie-stats">
+                        <div class="like-dislike">
+                            <div class="like-btn">👍 187</div>
+                            <div class="dislike-btn">👎 8</div>
+                        </div>
+                        <div class="movie-date">5 gün önce</div>
+                    </div>
+                </div>
+
+                <div class="movie-card">
+                    <div class="movie-title">Everything Everywhere All at Once</div>
+                    <div class="movie-year">2022</div>
+                    <div class="movie-description">
+                        Çok boyutlu evren konseptini harika işleyen, hem komik hem duygusal bir başyapıt. 
+                        Michelle Yeoh'un performansı Oscar'ı hak ediyor. Kesinlikle kaçırmayın!
+                    </div>
+                    <div class="movie-stats">
+                        <div class="like-dislike">
+                            <div class="like-btn">👍 312</div>
+                            <div class="dislike-btn">👎 18</div>
+                        </div>
+                        <div class="movie-date">1 hafta önce</div>
+                    </div>
+                </div>
+
+                <div class="movie-card">
+                    <div class="movie-title">Top Gun: Maverick</div>
+                    <div class="movie-year">2022</div>
+                    <div class="movie-description">
+                        Tom Cruise efsanesi devam ediyor! Aksiyon sahneleri nefes kesici, nostalji 
+                        dozu mükemmel. Sinema salonunda izlenmesi gereken filmlerden.
+                    </div>
+                    <div class="movie-stats">
+                        <div class="like-dislike">
+                            <div class="like-btn">👍 198</div>
+                            <div class="dislike-btn">👎 15</div>
+                        </div>
+                        <div class="movie-date">2 hafta önce</div>
+                    </div>
+                </div>
+
+                <div class="movie-card">
+                    <div class="movie-title">Oppenheimer</div>
+                    <div class="movie-year">2023</div>
+                    <div class="movie-description">
+                        Christopher Nolan'ın bir başka şaheseri. Atom bombasının babası J. Robert 
+                        Oppenheimer'ın hikayesi muhteşem bir şekilde anlatılmış. IMAX'te izleyin!
+                    </div>
+                    <div class="movie-stats">
+                        <div class="like-dislike">
+                            <div class="like-btn">👍 276</div>
+                            <div class="dislike-btn">👎 9</div>
+                        </div>
+                        <div class="movie-date">3 hafta önce</div>
+                    </div>
+                </div>
+
+                <div class="movie-card">
+                    <div class="movie-title">Blade Runner 2049</div>
+                    <div class="movie-year">2017</div>
+                    <div class="movie-description">
+                        Orijinal filmin harika devamı. Denis Villeneuve ve Roger Deakins ikilisinin 
+                        görsel şöleni, Hans Zimmer'in müzikleriyle birleşince ortaya sanat eseri çıkıyor.
+                    </div>
+                    <div class="movie-stats">
+                        <div class="like-dislike">
+                            <div class="like-btn">👍 167</div>
+                            <div class="dislike-btn">👎 7</div>
+                        </div>
+                        <div class="movie-date">1 ay önce</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="floating-action" title="Yeni Film Öner">
+        ➕
+    </a>
+</body>
+</html>

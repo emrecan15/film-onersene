@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Detayı - filmonersene.com</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/loginRegisterModal.css">
+    <link rel="stylesheet" href="css/allmovies.css">
+    <link rel="stylesheet" href="css/moviePage.css">
+    <link rel="stylesheet" href="/css/tag.css">
+</head>
+<body>
+    
+        <nav class="navbar navbar-expand-lg navbar-light navbar-gradient fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="bi bi-film"></i> filmonersene.com</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active text-white" aria-current="page" href="/tum-filmler">Tüm Filmler</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active text-white" aria-current="page" href="#">En Çok Beğenilenler</a>
+                </li>
+            </ul>
+            <form class="d-flex align-items-center mt-2">
+                <input class="form-control me-5 bg-dark text-white rounded-pill search-input" type="search" placeholder="Film Ara..." aria-label="Search">
+                
+            </form>
+
+            
+            <div class="d-flex align-items-center mt-2" id="authButtons">
+                <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#authModal" data-tab="login">Giriş Yap</button>
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#authModal" data-tab="register">Üye Ol</button>
+            </div>
+
+            </div>
+        </div>
+    	</nav>
+
+
+    <div class="container">
+        <a id="btnBack" href="javascript:history.back()" class="back-btn mt-2">
+            ← Geri Dön
+        </a>
+
+        <div class="movie-hero">
+            <div class="movie-poster">
+                <img id="movie-poster" src="https://via.placeholder.com/300x450/333/fff?text=Film+Posteri" alt="Film Posteri">
+                <div class="trailer-link mt-2"><a id="trailer-link" href="#" target="_blank" class="text-decoration-none text-white fw-bold">Trailer</a> </div>
+            </div>
+
+            <div class="movie-info">
+                <h1 class="movie-title" id="movie-title">Film Adı</h1>
+                
+                <div class="movie-meta">
+                    <div class="rating">
+                        <span class="rating-star">★</span>
+                        <span class="rating-value" id="movie-rating">8.5</span>
+                    </div>
+                    <div class="genres" id="movie-genres">
+                        <span class="genre-tag">Aksiyon</span>
+                        <span class="genre-tag">Dram</span>
+                    </div>
+                </div>
+                
+                <div class="movie-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Orijinal Adı:</span>
+                        <span class="detail-value" id="movie-original-title">Mad Max 2: The Road Warrior</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Yönetmen:</span>
+                        <span class="detail-value" id="movie-director">George Miller</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Yıl:</span>
+                        <span class="detail-value" id="movie-year">1981</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Ülke:</span>
+                        <span class="detail-value" id="movie-country">Avustralya</span>
+                    </div>
+                </div>
+                
+                 
+
+                <div class="recommended-by mt-3" id="recommended-section">
+                    <div class="recommender-info">
+                        <div class="recommender-avatar" id="recommender-avatar">A</div>
+                        <h4 id="recommender-name">Ahmet Yılmaz</h4>
+                        <span id="recommender-tag" class="badge ms-1">Yeni Üye</span>
+                    </div>
+                    <hr>
+                    
+                    <p id="recommender-description">Mad Max 2, aksiyon ve distopya türünü muhteşem şekilde harmanlayan, temposu yüksek ve atmosferiyle etkileyici bir film. Mel Gibson’ın performansı çok güçlü ve hikâyenin ilerleyişi sizi ekrana kilitliyor. Çölün ortasında geçen kovalamacalar ve araç savaşları sinema tarihine damga vuracak kadar yaratıcı. Serinin en iyi filmlerinden biri olduğunu rahatlıkla söyleyebilirim.</p>
+                    
+                </div>
+
+                <div class="actions">
+                    <button class="action-btn like-btn" id="like-btn">
+                        👍 <span id="like-count">42</span>
+                    </button>
+                    <button class="action-btn dislike-btn" id="dislike-btn">
+                        👎 <span id="dislike-count">8</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="movie-description">
+            <h3>Film Hakkında</h3>
+            <p id="movie-description">
+                Mel Gibson’un Max Rockatansky adında bıkkın bir polisi canlandırdığı film, peşine düştüğü çetenin yardımcısını öldürmesinden sonra kendisini ve ailesini hayatta tutmak için harekete geçen bir polisin hikayesini anlatıyor.
+            </p>
+        </div>
+
+        <div class="comments-section">
+            <h3 class="comments-title">Yorumlar</h3>
+            <div id="comments-container">
+                <div class="comment">
+                    <div class="comment-author">Mehmet K.</div>
+                    <div class="comment-text">Harika bir film! Kesinlikle izlemenizi tavsiye ederim.</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-author">Ayşe M.</div>
+                    <div class="comment-text">Çok etkileyici bir hikaye. Oyuncular da gerçekten başarılı.</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-author">Can S.</div>
+                    <div class="comment-text">Bu filme bayıldım. Özellikle son sahneler muhteşemdi!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!-- config js  -->
+    <script src="js/config.js"></script>
+    
+    
+    <script src="js/api.js"></script>
+    <!-- jQuery (Modalı yüklemek için) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- BOOTSTRAP JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+
+    <script>
+        
+        
+        const movieId = new URLSearchParams(window.location.search).get('id');
+        if (movieId) {
+            fetchMovieData(movieId);
+        }
+        
+
+        function loadMovieData(data) {
+        	document.getElementById('movie-poster').src = data.posterUrl || 'https://via.placeholder.com/300x450/333/fff?text=Film+Posteri';
+            document.getElementById('movie-title').textContent = data.movieName || 'Film Adı';
+            document.getElementById('movie-original-title').textContent = data.originalTitle || 'Bilinmiyor';
+            document.getElementById('movie-director').textContent = data.director || 'Bilinmiyor';
+            document.getElementById('movie-year').textContent = data.year || 'Bilinmiyor';
+            document.getElementById('movie-country').textContent = data.country || 'Bilinmiyor';
+            document.getElementById('movie-rating').textContent = data.voteAverage || '0.0';
+            document.getElementById('like-count').textContent = data.likes || '0';
+            document.getElementById('dislike-count').textContent = data.dislikes || '0';
+            document.getElementById('movie-description').textContent = data.description || 'Bu film için kayıtlı açıklama bulunamadı.';
+           
+            const trailerLink = document.getElementById('trailer-link');
+
+            if (!data.imdbId) {
+                trailerLink.removeAttribute('target');
+                trailerLink.href = '#'; // veya boş string, ya da istediğin başka bir şey
+            } else {
+                trailerLink.href = 'https://www.imdb.com/title/' + data.imdbId;
+                trailerLink.setAttribute('target', '_blank');
+            }
+
+
+            // Tür etiketlerini doldur
+            const genresContainer = document.getElementById('movie-genres');
+            genresContainer.innerHTML = '';
+            if (data.genres) {
+                data.genres.forEach(genre => {
+                    const genreTag = document.createElement('span');
+                    genreTag.className = 'genre-tag';
+                    genreTag.textContent = genre.name;
+                    genresContainer.appendChild(genreTag);
+                });
+            }
+
+            // Önerilme bilgilerini doldur
+            if (data.recommendedBy) {
+                document.getElementById('recommender-name').textContent = data.recommendedBy.userName;
+                
+                document.getElementById('recommender-description').textContent = data.recommenderComment;
+              //  document.getElementById('recommender-tag').textContent = data.recommendedBy.tag;
+                document.getElementById('recommender-avatar').textContent = data.recommendedBy.userName.charAt(0).toUpperCase();
+                
+                const tag = data.recommendedBy.tag || 'Ziyaretçi';
+                const tagClass = `tag-${tag.toLowerCase().replace(/\s+/g, '-')}`;
+
+                const tagElement = document.getElementById('recommender-tag');
+                tagElement.textContent = tag;
+                tagElement.className = `badge ms-1 ${tagClass}`;
+                
+            }
+
+            // Kullanıcının beğeni durumunu kontrol et
+            if (data.likedByUser) {
+                document.getElementById('like-btn').classList.add('active');
+            }
+            if (data.dislikedByUser) {
+                document.getElementById('dislike-btn').classList.add('active');
+            }
+        }
+
+        // Beğeni butonları için event listener'lar
+        document.getElementById('like-btn').addEventListener('click', function() {
+            const btn = this;
+            const dislikeBtn = document.getElementById('dislike-btn');
+            const likeCount = document.getElementById('like-count');
+            
+            if (btn.classList.contains('active')) {
+                // Beğeniyi kaldır
+                btn.classList.remove('active');
+                likeCount.textContent = parseInt(likeCount.textContent) - 1;
+            } else {
+                // Beğeni ekle
+                btn.classList.add('active');
+                likeCount.textContent = parseInt(likeCount.textContent) + 1;
+                
+                // Dislike varsa kaldır
+                if (dislikeBtn.classList.contains('active')) {
+                    dislikeBtn.classList.remove('active');
+                    document.getElementById('dislike-count').textContent = parseInt(document.getElementById('dislike-count').textContent) - 1;
+                }
+            }
+        });
+
+        document.getElementById('dislike-btn').addEventListener('click', function() {
+            const btn = this;
+            const likeBtn = document.getElementById('like-btn');
+            const dislikeCount = document.getElementById('dislike-count');
+            
+            if (btn.classList.contains('active')) {
+                // Dislike'ı kaldır
+                btn.classList.remove('active');
+                dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+            } else {
+                // Dislike ekle
+                btn.classList.add('active');
+                dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
+                
+                // Like varsa kaldır
+                if (likeBtn.classList.contains('active')) {
+                    likeBtn.classList.remove('active');
+                    document.getElementById('like-count').textContent = parseInt(document.getElementById('like-count').textContent) - 1;
+                }
+            }
+        });
+
+        
+        async function fetchMovieData(movieId) {
+            try {
+            	const response = await fetch(`${API_BASE_URL}/movies?id=${movieId}`, {
+            		  credentials: 'include'
+            		});
+                const data = await response.json();
+                loadMovieData(data);
+            } catch (error) {
+                console.error('Film verileri yüklenirken hata:', error);
+            }
+        }
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+/* Modal Backdrop */
+#authModal .modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+#authModal .modal-header {
+    border-bottom: none;
+    padding: 2rem 2rem 1rem;
+}
+
+#authModal .modal-title {
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+#authModal .modal-body {
+    padding: 1rem 2rem 2rem;
+}
+
+/* Modal Form Controls */
+#authModal .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+#authModal .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Modal Login Button */
+#authModal .btn-login {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#authModal .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    color: white;
+}
+
+/* Modal Divider */
+#authModal .divider {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+#authModal .divider::before,
+#authModal .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #dee2e6;
+}
+
+#authModal .divider span {
+    padding: 0 1rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Modal Social Buttons */
+#authModal .social-btn {
+    border: 2px solid #dee2e6;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    color: #6c757d;
+    background: white;
+}
+
+#authModal .social-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+/* Modal Tabs */
+#authModal .nav-tabs {
+    border-bottom: none;
+    margin-bottom: 1rem;
+}
+
+#authModal .nav-tabs .nav-link {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    color: #6c757d;
+    background: transparent;
+}
+
+#authModal .nav-tabs .nav-link.active {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+}
+
+#authModal .nav-tabs .nav-link:hover:not(.active) {
+    color: #667eea;
+}
+
+/* Modal Text Links */
+#authModal .text-link {
+    color: #667eea;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+#authModal .text-link:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+/* Modal Close Button */
+#authModal .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+#authModal .btn-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+#authModal .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6c757d;
+    transition: all 0.3s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+#authModal .close-btn:hover {
+    color: #667eea;
+    transform: rotate(90deg);
+}
+
+
+/* Modal Form Labels */
+#authModal .form-label {
+    color: #495057;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Modal Form Check */
+#authModal .form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+#authModal .form-check-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Modal Responsive */
+@media (max-width: 768px) {
+    #authModal .modal-dialog {
+        margin: 1rem;
+    }
+    
+    #authModal .modal-header {
+        padding: 1.5rem 1.5rem 0.5rem;
+    }
+    
+    #authModal .modal-body {
+        padding: 0.5rem 1.5rem 1.5rem;
+    }
+    
+    #authModal .nav-tabs .nav-link {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}

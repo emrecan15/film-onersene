@@ -1,0 +1,793 @@
+<!-- Film Önerisi Modal -->
+<div class="modal fade" id="filmOneriModal" tabindex="-1" aria-labelledby="filmOneriModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filmOneriModalLabel">
+                    <i class="fas fa-film"></i> Film Önerisi Yap
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Film Arama -->
+                <div class="film-autocomplete" id="searchSection">
+                    <label for="filmSearch" class="form-label">
+                        <i class="fas fa-search"></i> Film Ara
+                    </label>
+                    <input 
+                        type="text" 
+                        class="form-control search-input" 
+                        id="filmSearch" 
+                        placeholder="Önermek istediğiniz filmi arayın... (örn: Inception, Interstellar)"
+                        autocomplete="off"
+                    >
+                    
+                    <!-- Öneriler Dropdown -->
+                    <div class="suggestions-dropdown" id="suggestionsDropdown" style="display: none;">
+                        <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Filmler aranıyor...
+                        </div>
+                        <div id="suggestionsList"></div>
+                        <div class="no-results" id="noResults" style="display: none;">
+                            <i class="fas fa-film"></i> Film bulunamadı
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seçilen Film Önizleme -->
+                <div class="selected-film-preview" id="selectedFilmPreview">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h6><i class="fas fa-check-circle text-success"></i> Seçilen Film</h6>
+                        <button class="btn change-film-btn" id="changeFilmBtn">
+                            <i class="fas fa-edit"></i> Filmi Değiştir
+                        </button>
+                    </div>
+                    <div class="film-preview-content" id="filmPreviewContent">
+                        <!-- Film önizleme içeriği buraya gelecek -->
+                    </div>
+                </div>
+
+                <!-- Kullanıcı Yorumu -->
+                <div class="user-comment-section" id="commentSection" style="display: none;">
+                    <label for="userComment" class="user-comment-label">
+                        <i class="fas fa-comment"></i> Neden Bu Filmi Öneriyorsunuz?
+                    </label>
+                    <textarea 
+                        class="form-control user-comment-textarea" 
+                        id="userComment" 
+                        placeholder="Bu filmi neden öneriyorsunuz? Beğendiğiniz yanları, etkileyici sahneleri veya özel yorumlarınızı yazın..."
+                        maxlength="500"
+                    ></textarea>
+                    <div class="text-end mt-2">
+                        <small class="text-muted">
+                            <span id="charCount">0</span>/500 karakter
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i> İptal
+                </button>
+                <button type="button" class="btn btn-submit" id="submitBtn" disabled>
+                    <i class="fas fa-paper-plane"></i> Önerimi Gönder
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Film Önerisi Modal Stilleri */
+    #filmOneriModal .modal-content {
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    #filmOneriModal .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 20px 20px 0 0;
+        padding: 20px 30px;
+        border-bottom: none;
+    }
+
+    #filmOneriModal .modal-title {
+        font-weight: 700;
+        font-size: 1.3rem;
+    }
+
+    #filmOneriModal .btn-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        opacity: 0.8;
+    }
+
+    #filmOneriModal .btn-close:hover {
+        opacity: 1;
+    }
+
+    #filmOneriModal .film-autocomplete {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    #filmOneriModal .search-input {
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 12px 20px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    #filmOneriModal .search-input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        outline: none;
+    }
+
+    #filmOneriModal .suggestions-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 15px;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-top: 5px;
+    }
+
+    #filmOneriModal .suggestion-item {
+        padding: 15px;
+        border-bottom: 1px solid #f8f9fa;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.2s ease;
+    }
+
+    #filmOneriModal .suggestion-item:hover {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    }
+
+    #filmOneriModal .suggestion-item:last-child {
+        border-bottom: none;
+    }
+
+    #filmOneriModal .film-poster {
+        width: 50px;
+        height: 75px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #filmOneriModal .no-poster {
+        width: 50px;
+        height: 75px;
+        background: linear-gradient(135deg, #e9ecef, #dee2e6);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        font-size: 1.2rem;
+    }
+
+    #filmOneriModal .film-info h6 {
+        margin: 0 0 5px 0;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    #filmOneriModal .film-details {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+    }
+
+    #filmOneriModal .film-rating {
+        color: #f39c12;
+        font-weight: 600;
+    }
+
+    #filmOneriModal .selected-film-preview {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 25px;
+        display: none;
+    }
+
+    #filmOneriModal .selected-film-preview.show {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    #filmOneriModal .film-preview-content {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    #filmOneriModal .preview-poster {
+        width: 120px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    #filmOneriModal .preview-no-poster {
+        width: 120px;
+        height: 180px;
+        background: linear-gradient(135deg, #dee2e6, #adb5bd);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        font-size: 2rem;
+    }
+
+    #filmOneriModal .film-preview-info {
+        flex: 1;
+    }
+
+    #filmOneriModal .film-preview-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    #filmOneriModal .film-preview-meta {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+
+    #filmOneriModal .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #7f8c8d;
+        font-size: 0.9rem;
+    }
+
+    #filmOneriModal .meta-item i {
+        color: #667eea;
+    }
+
+    #filmOneriModal .film-preview-overview {
+        color: #5a6c7d;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    #filmOneriModal .user-comment-section {
+        margin-top: 25px;
+    }
+
+    #filmOneriModal .user-comment-label {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    #filmOneriModal .user-comment-textarea {
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 15px;
+        resize: vertical;
+        min-height: 100px;
+        transition: all 0.3s ease;
+    }
+
+    #filmOneriModal .user-comment-textarea:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        outline: none;
+    }
+
+    #filmOneriModal .btn-submit {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border: none;
+        padding: 12px 30px;
+        font-weight: 600;
+        border-radius: 25px;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    #filmOneriModal .btn-submit:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    #filmOneriModal .btn-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    #filmOneriModal .loading-spinner {
+        text-align: center;
+        padding: 20px;
+        color: #667eea;
+    }
+
+    #filmOneriModal .no-results {
+        text-align: center;
+        padding: 20px;
+        color: #7f8c8d;
+    }
+
+    #filmOneriModal .change-film-btn {
+        background: none;
+        border: 2px solid #dc3545;
+        color: #dc3545;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+    }
+
+    #filmOneriModal .change-film-btn:hover {
+        background: #dc3545;
+        color: white;
+    }
+
+    /* Responsive düzenlemeler */
+    @media (max-width: 768px) {
+        #filmOneriModal .film-preview-content {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #filmOneriModal .film-preview-meta {
+            justify-content: center;
+        }
+
+        #filmOneriModal .preview-poster,
+        #filmOneriModal .preview-no-poster {
+            width: 100px;
+            height: 150px;
+        }
+    }
+</style>
+
+
+<!-- config js -->
+<script src="js/config.js"></script>
+<script>
+    class FilmOneriSistemi {
+        constructor() {
+            this.TMDB_API_KEY = '665b22f8039ac37dddf1c13626537e27';
+            this.TMDB_BASE_URL = 'https://api.themoviedb.org/3';
+            this.TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
+            
+            this.searchInput = document.getElementById('filmSearch');
+            this.suggestionsDropdown = document.getElementById('suggestionsDropdown');
+            this.suggestionsList = document.getElementById('suggestionsList');
+            this.loadingSpinner = document.getElementById('loadingSpinner');
+            this.noResults = document.getElementById('noResults');
+            this.selectedFilmPreview = document.getElementById('selectedFilmPreview');
+            this.filmPreviewContent = document.getElementById('filmPreviewContent');
+            this.commentSection = document.getElementById('commentSection');
+            this.userComment = document.getElementById('userComment');
+            this.charCount = document.getElementById('charCount');
+            this.submitBtn = document.getElementById('submitBtn');
+            this.changeFilmBtn = document.getElementById('changeFilmBtn');
+            this.searchSection = document.getElementById('searchSection');
+            
+            this.selectedMovie = null;
+            this.debounceTimer = null;
+            
+            this.init();
+        }
+        
+        init() {
+            // Input olaylarını dinle
+            this.searchInput.addEventListener('input', (e) => {
+                this.handleInputChange(e.target.value);
+            });
+            
+            // Dropdown dışına tıklandığında kapat
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.film-autocomplete')) {
+                    this.hideSuggestions();
+                }
+            });
+            
+            // Input'a odaklanıldığında önerileri göster
+            this.searchInput.addEventListener('focus', () => {
+                if (this.searchInput.value.trim() && this.suggestionsList.children.length > 0) {
+                    this.showSuggestions();
+                }
+            });
+            
+            // Yorum alanı karakter sayacı
+            this.userComment.addEventListener('input', () => {
+                this.updateCharCount();
+                this.checkSubmitButtonState();
+            });
+            
+            // Film değiştir butonu
+            this.changeFilmBtn.addEventListener('click', () => {
+                this.resetSelection();
+            });
+            
+            // Modal temizleme
+            document.getElementById('filmOneriModal').addEventListener('hidden.bs.modal', () => {
+                this.resetModal();
+            });
+            
+            // Gönder butonu
+            this.submitBtn.addEventListener('click', () => {
+                this.submitRecommendation();
+            });
+        }
+        
+        handleInputChange(query) {
+            clearTimeout(this.debounceTimer);
+            this.debounceTimer = setTimeout(() => {
+                this.searchMovies(query);
+            }, 300);
+        }
+        
+        async searchMovies(query) {
+            if (!query.trim()) {
+                this.hideSuggestions();
+                return;
+            }
+            
+            this.showLoading();
+            
+            try {
+                const response = await fetch(
+                    `${this.TMDB_BASE_URL}/search/movie?api_key=${this.TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=tr-TR`
+                );
+                
+                if (!response.ok) {
+                    throw new Error('API isteği başarısız');
+                }
+                
+                const data = await response.json();
+                this.displaySuggestions(data.results);
+                
+            } catch (error) {
+                console.error('Film arama hatası:', error);
+                this.showError('Arama sırasında bir hata oluştu');
+            }
+        }
+        
+        displaySuggestions(movies) {
+            this.hideLoading();
+            
+            const filteredMovies = movies
+                .filter(movie => movie.title && movie.release_date)
+                .slice(0, 6);
+            
+            this.suggestionsList.innerHTML = '';
+            
+            if (filteredMovies.length === 0) {
+                this.showNoResults();
+                return;
+            }
+            
+            filteredMovies.forEach(movie => {
+                const suggestionItem = this.createSuggestionItem(movie);
+                this.suggestionsList.appendChild(suggestionItem);
+            });
+            
+            this.showSuggestions();
+        }
+        
+        createSuggestionItem(movie) {
+            const div = document.createElement('div');
+            div.className = 'suggestion-item';
+            div.onclick = () => this.selectMovie(movie);
+            
+            const posterUrl = movie.poster_path 
+                ? `${this.TMDB_IMAGE_BASE}${movie.poster_path}`
+                : null;
+            
+            const releaseYear = movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A';
+            const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
+            
+            div.innerHTML = `
+                ${posterUrl 
+                    ? `<img src="${posterUrl}" alt="${movie.title}" class="film-poster">` 
+                    : '<div class="no-poster"><i class="fas fa-film"></i></div>'
+                }
+                <div class="film-info">
+                    <h6>${movie.title}</h6>
+                    <div class="film-details">
+                        <i class="fas fa-calendar"></i> ${releaseYear}
+                        <span class="ms-3 film-rating">
+                            <i class="fas fa-star"></i> ${rating}
+                        </span>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+        
+        async selectMovie(movie) {
+            this.selectedMovie = movie;
+            
+            // Detaylı bilgileri al
+            try {
+                const response = await fetch(
+                    `${this.TMDB_BASE_URL}/movie/${movie.id}?api_key=${this.TMDB_API_KEY}&language=tr-TR&append_to_response=credits`
+                );
+                
+                if (response.ok) {
+                    const detailedMovie = await response.json();
+                    this.selectedMovie = { ...movie, ...detailedMovie };
+                }
+            } catch (error) {
+                console.error('Film detayları alınamadı:', error);
+            }
+            
+            this.showSelectedMovie();
+            this.hideSuggestions();
+            this.searchInput.value = '';
+        }
+        
+        showSelectedMovie() {
+            const movie = this.selectedMovie;
+            const posterUrl = movie.poster_path 
+                ? `${this.TMDB_IMAGE_BASE}${movie.poster_path}`
+                : null;
+            
+            const releaseYear = movie.release_date ? new Date(movie.release_date).getFullYear() : 'Bilinmiyor';
+            const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
+            const runtime = movie.runtime ? `${movie.runtime} dk` : 'Bilinmiyor';
+            
+            // Yönetmen bilgisi
+            let director = 'Bilinmiyor';
+            if (movie.credits && movie.credits.crew) {
+                const directorObj = movie.credits.crew.find(person => person.job === 'Director');
+                if (directorObj) director = directorObj.name;
+            }
+            
+            // Türler
+            const genres = movie.genres ? movie.genres.map(g => g.name).join(', ') : 'Bilinmiyor';
+            
+            this.filmPreviewContent.innerHTML = `
+                ${posterUrl 
+                    ? `<img src="${posterUrl}" alt="${movie.title}" class="preview-poster">` 
+                    : '<div class="preview-no-poster"><i class="fas fa-film"></i></div>'
+                }
+                <div class="film-preview-info">
+                    <h5 class="film-preview-title">${movie.title}</h5>
+                    <div class="film-preview-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>${releaseYear}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-star"></i>
+                            <span class="film-rating">${rating}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>${runtime}</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user"></i>
+                            <span>${director}</span>
+                        </div>
+                    </div>
+                    <div class="meta-item mb-3">
+                        <i class="fas fa-tags"></i>
+                        <span>${genres}</span>
+                    </div>
+                    ${movie.overview ? `<p class="film-preview-overview">${movie.overview}</p>` : ''}
+                </div>
+            `;
+            
+            // Bölümleri göster/gizle
+            this.searchSection.style.display = 'none';
+            this.selectedFilmPreview.classList.add('show');
+            this.commentSection.style.display = 'block';
+            this.checkSubmitButtonState();
+        }
+        
+        resetSelection() {
+            this.selectedMovie = null;
+            this.searchSection.style.display = 'block';
+            this.selectedFilmPreview.classList.remove('show');
+            this.commentSection.style.display = 'none';
+            this.userComment.value = '';
+            this.updateCharCount();
+            this.checkSubmitButtonState();
+            this.searchInput.focus();
+        }
+        
+        resetModal() {
+            this.selectedMovie = null;
+            this.searchInput.value = '';
+            this.userComment.value = '';
+            this.hideSuggestions();
+            this.searchSection.style.display = 'block';
+            this.selectedFilmPreview.classList.remove('show');
+            this.commentSection.style.display = 'none';
+            this.updateCharCount();
+            this.checkSubmitButtonState();
+        }
+        
+        updateCharCount() {
+            const length = this.userComment.value.length;
+            this.charCount.textContent = length;
+            
+            if (length > 450) {
+                this.charCount.style.color = '#dc3545';
+            } else if (length > 400) {
+                this.charCount.style.color = '#ffc107';
+            } else {
+                this.charCount.style.color = '#6c757d';
+            }
+        }
+        
+        checkSubmitButtonState() {
+            const hasMovie = this.selectedMovie !== null;
+            const hasComment = this.userComment.value.trim().length > 0;
+            
+            this.submitBtn.disabled = !(hasMovie && hasComment);
+        }
+        
+        submitRecommendation() {
+            if (!this.selectedMovie || !this.userComment.value.trim()) {
+                return;
+            }
+
+            const movie = this.selectedMovie;
+
+            const dto = {
+                posterUrl: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '',
+                backdropUrl: movie.backdrop_path ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}` : '',
+                movieName: movie.title,
+                originalTitle: movie.original_title,
+                description: movie.overview,
+                releaseDate: movie.release_date,
+                runtime: movie.runtime ? movie.runtime.toString() : '',
+                imdbId: movie.imdb_id || '', // bazen gelmeyebilir
+                voteAverage: movie.vote_average,
+                originalLanguage: movie.original_language,
+                country: movie.production_countries?.[0]?.name || '',
+                popularity: movie.popularity,
+
+                director: movie.credits?.crew?.find(person => 
+                person.known_for_department === "Directing"
+                )?.name || 'Yönetmen Bilgisi Yok',
+                
+                genres: movie.genres?.map(g => ({
+                    tmdbId: g.id,
+                    name: g.name
+                })) || [],
+                userComment: this.userComment.value.trim()
+            };
+
+            fetch(`${API_BASE_URL}/movies/save`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: 'include',
+                body: JSON.stringify(dto)
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    const errorText = await response.text(); // boş olabilir, ama yine de al
+                    throw new Error(`Hata: ${response.status} ${errorText}`);
+                }
+                return response.json(); // sadece başarılıysa çöz
+            })
+            .then(data => {
+                this.showSuccessMessage();
+                const modal = bootstrap.Modal.getInstance(document.getElementById('filmOneriModal'));
+                modal.hide();
+            })
+            .catch(error => {
+                console.error("Film önerisi gönderilemedi:", error);
+                alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+            });
+
+        }
+
+        
+        showSuccessMessage() {
+            // Bu fonksiyon index.html'de özelleştirilecek
+            alert('Film öneriniz başarıyla gönderildi!');
+            location.reload();
+        }
+        
+        showSuggestions() {
+            this.suggestionsDropdown.style.display = 'block';
+        }
+        
+        hideSuggestions() {
+            this.suggestionsDropdown.style.display = 'none';
+        }
+        
+        showLoading() {
+            this.loadingSpinner.style.display = 'block';
+            this.noResults.style.display = 'none';
+            this.showSuggestions();
+        }
+        
+        hideLoading() {
+            this.loadingSpinner.style.display = 'none';
+        }
+        
+        showNoResults() {
+            this.noResults.style.display = 'block';
+            this.showSuggestions();
+        }
+        
+        showError(message) {
+            this.hideLoading();
+            this.suggestionsList.innerHTML = `
+                <div class="text-center p-3 text-danger">
+                    <i class="fas fa-exclamation-triangle"></i> ${message}
+                </div>
+            `;
+            this.showSuggestions();
+        }
+    }
+    
+    // Modal yüklendiğinde başlat
+    document.addEventListener('DOMContentLoaded', () => {
+        // Eğer modal zaten DOM'da varsa başlat
+        if (document.getElementById('filmOneriModal')) {
+            window.filmOneriSistemi = new FilmOneriSistemi();
+        }
+    });
+    /* deprecated
+    // Modal dinamik olarak eklendiğinde başlatmak için
+    document.addEventListener('DOMNodeInserted', (e) => {
+        if (e.target.id === 'filmOneriModal') {
+            window.filmOneriSistemi = new FilmOneriSistemi();
+        }
+    });
+    */
+ // MutationObserver ile dinamik element kontrolü (üsttekinin alternatifi)
+ /*
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+                if (node.id === 'filmOneriModal' || node.querySelector('#filmOneriModal')) {
+                    window.filmOneriSistemi = new FilmOneriSistemi();
+                    observer.disconnect(); // İşlem tamamlandığında observer'ı durdur
+                }
+            });
+        });
+    });
+
+    // Document'i gözlemle (childList: DOM ekleme/silme değişikliklerini izle)
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+    
+    */
+</script>

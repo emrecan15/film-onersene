@@ -1,0 +1,34 @@
+body{
+    background: linear-gradient(
+            120deg,
+            hsl(270deg 100% 2%) 0%,
+            hsl(270deg 98% 3%) 8%,
+            hsl(271deg 95% 4%) 17%,
+            hsl(271deg 93% 6%) 25%,
+            hsl(271deg 94% 8%) 33%,
+            hsl(271deg 95% 10%) 42%,
+            hsl(272deg 97% 12%) 50%,
+            hsl(271deg 95% 10%) 58%,
+            hsl(271deg 94% 8%) 67%,
+            hsl(271deg 93% 6%) 75%,
+            hsl(271deg 95% 4%) 83%,
+            hsl(270deg 98% 3%) 92%,
+            hsl(270deg 100% 2%) 100%
+        );
+        min-height: 100vh;
+        padding-top: 70px;
+}
+
+.information{
+    background: rgba(255, 255, 255, 0.034);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+
