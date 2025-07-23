@@ -11,7 +11,7 @@ class MoviePagination {
         
         this.init();
     }
-
+/*
 	init() {
 	    const urlParams = new URLSearchParams(window.location.search);
 	    const page = parseInt(urlParams.get('page')) || 0;
@@ -50,6 +50,125 @@ class MoviePagination {
 	    }
 	}
 
+	
+*/
+
+init() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = parseInt(urlParams.get('page')) || 0;
+    const genre = urlParams.get('genre') || null;
+
+    this.createPaginationContainer();
+
+    this.currentPage = page;
+    this.currentGenre = genre;
+
+    // Kategori aktiflik kontrolü (hem desktop hem mobile için)
+    this.updateCategoryActive(genre);
+
+    this.loadMovies(page, genre);
+
+    // Desktop kategori menüsü event listener
+    const categoryList = document.querySelector('.category-list');
+    if (categoryList) {
+        categoryList.addEventListener('click', (e) => {
+            const target = e.target.closest('.category-link');
+            if (target) {
+                e.preventDefault();
+                const selectedGenre = target.dataset.genre?.trim();
+                if (selectedGenre) {
+                    this.selectCategory(target, selectedGenre);
+                }
+            }
+        });
+    }
+
+    // Mobile kategori menüsü event listener
+    const mobileCategoryList = document.querySelector('.mobile-category-list');
+    if (mobileCategoryList) {
+        mobileCategoryList.addEventListener('click', (e) => {
+            const target = e.target.closest('.mobile-category-link');
+            if (target) {
+                e.preventDefault();
+                const selectedGenre = target.dataset.genre?.trim();
+                if (selectedGenre) {
+                    this.selectMobileCategory(target, selectedGenre);
+                }
+            }
+        });
+    }
+}
+
+
+// Yeni metod: Her iki menüdeki active durumları güncelle
+updateCategoryActive(genre) {
+    // Desktop kategori linklerini güncelle
+    document.querySelectorAll('.category-link').forEach(link => {
+        const linkGenre = link.dataset.genre?.trim().toLowerCase();
+        const selectedGenre = genre?.trim().toLowerCase();
+        if (linkGenre && linkGenre === selectedGenre) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+
+    // Mobile kategori linklerini güncelle
+    document.querySelectorAll('.mobile-category-link').forEach(link => {
+        const linkGenre = link.dataset.genre?.trim().toLowerCase();
+        const selectedGenre = genre?.trim().toLowerCase();
+        if (linkGenre && linkGenre === selectedGenre) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+// Yeni metod: Mobile kategori seçimi
+selectMobileCategory(element, genre) {
+    const isActive = element.classList.contains('active');
+
+    if (isActive) {
+        // İptal et: Tüm linklerden active kaldır
+        this.updateCategoryActive(null);
+        this.currentGenre = null;
+        this.loadMovies(0, null);
+        this.updateUrlParams(0, null);
+    } else {
+        // Yeni kategori seçildi
+        this.updateCategoryActive(genre);
+        this.currentGenre = genre;
+        this.loadMovies(0, genre);
+        this.updateUrlParams(0, genre);
+    }
+
+    // Mobile menüyü kapat
+    const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('categoryOffcanvas'));
+    if (offcanvas) {
+        offcanvas.hide();
+    }
+}
+
+selectCategory(element, genre) {
+    const isActive = element.classList.contains('active');
+
+    if (isActive) {
+        // İptal et: Tüm linklerden active kaldır
+        this.updateCategoryActive(null);
+        this.currentGenre = null;
+        this.loadMovies(0, null);
+        this.updateUrlParams(0, null);
+    } else {
+        // Yeni kategori seçildi
+        this.updateCategoryActive(genre);
+        this.currentGenre = genre;
+        this.loadMovies(0, genre);
+        this.updateUrlParams(0, genre);
+    }
+}
+
+
 
     createPaginationContainer() {
         const container = document.querySelector(this.containerSelector);
@@ -66,6 +185,7 @@ class MoviePagination {
         }
     }
 	
+	/*
 	selectCategory(element, genre) {
 	    const isActive = element.classList.contains('active');
 
@@ -88,6 +208,8 @@ class MoviePagination {
 		  this.updateUrlParams(0,genre);
 	    }
 	  }
+	  
+	  */
 	
 	  updateUrlParams(page, genre) {
 	      const url = new URL(window.location);
@@ -175,7 +297,7 @@ class MoviePagination {
     createMovieCard(movie) {
         console.log(movie);
         const cardDiv = document.createElement('div');
-        cardDiv.className = 'col-sm-6 col-md-6 col-lg-4 movie-card-wrapper';
+        cardDiv.className = 'col-sm-12 col-md-6 col-lg-4 movie-card-wrapper';
         
         const genreBadges = movie.genres ? 
             movie.genres.map(genre => `<span class="badge bg-secondary">${genre.name || genre}</span>`).join('') : '';

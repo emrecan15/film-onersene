@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
@@ -17,7 +18,7 @@
         <div class="container">
             <a class="navbar-brand" href="/"><i class="bi bi-film"></i> filmonersene.com</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span><i class="fa-solid fa-bars" style="color: #ffffff;"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -28,6 +29,7 @@
                 <a class="nav-link active text-white" aria-current="page" href="#">En Çok Beğenilenler</a>
                 </li>
             </ul>
+            
             <form class="d-flex align-items-center mt-2">
                 <input class="form-control me-5 bg-dark text-white rounded-pill search-input" type="search" placeholder="Film Ara..." aria-label="Search">
                 
@@ -45,6 +47,14 @@
 
     <section class="movies">
         <div class="container">
+        	<div class="row mb-2">
+        		<!-- Mevcut search form'dan ÖNCE bu kodu ekleyin -->
+				<button class="btn btn-outline-light me-3 d-lg-none mobile-category-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoryOffcanvas" aria-controls="categoryOffcanvas">
+				    <i class="bi bi-collection-play me-1"></i>
+				    Kategoriler
+				</button>
+        	</div>
+        	
             <div class="row mb-2">
                 <div class="col" style="border-bottom: 1px solid rgb(160, 160, 160);"><h4 class="text-white">Tüm Filmler</h4></div>
             </div>
@@ -285,6 +295,109 @@
     </div>
     
     
+    
+    
+    
+    <!-- Mobile Category Offcanvas -->
+<div class="offcanvas offcanvas-start mobile-category-offcanvas" tabindex="-1" id="categoryOffcanvas" aria-labelledby="categoryOffcanvasLabel">
+    <div class="offcanvas-header mobile-category-header">
+        <h5 class="offcanvas-title mobile-category-title" id="categoryOffcanvasLabel">
+            <i class="bi bi-collection-play me-2"></i>
+            Kategoriler
+        </h5>
+        <button type="button" class="mobile-category-close" data-bs-dismiss="offcanvas" aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    <div class="offcanvas-body mobile-category-body">
+        <ul class="mobile-category-list">
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Aksiyon">
+                    <i class="bi bi-lightning-charge mobile-category-icon"></i>
+                    Aksiyon
+                    <span class="mobile-category-count">142</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Komedi">
+                    <i class="bi bi-emoji-laughing mobile-category-icon"></i>
+                    Komedi
+                    <span class="mobile-category-count">98</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Dram">
+                    <i class="bi bi-mask mobile-category-icon"></i>
+                    Dram
+                    <span class="mobile-category-count">156</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Bilim-Kurgu">
+                    <i class="bi bi-rocket mobile-category-icon"></i>
+                    Bilim Kurgu
+                    <span class="mobile-category-count">87</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Korku">
+                    <i class="bi bi-moon-stars mobile-category-icon"></i>
+                    Korku
+                    <span class="mobile-category-count">73</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Romantik">
+                    <i class="bi bi-heart mobile-category-icon"></i>
+                    Romantik
+                    <span class="mobile-category-count">64</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Animasyon">
+                    <i class="bi bi-palette mobile-category-icon"></i>
+                    Animasyon
+                    <span class="mobile-category-count">91</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Belgesel">
+                    <i class="bi bi-camera-reels mobile-category-icon"></i>
+                    Belgesel
+                    <span class="mobile-category-count">45</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Macera">
+                    <i class="bi bi-compass mobile-category-icon"></i>
+                    Macera
+                    <span class="mobile-category-count">112</span>
+                </a>
+            </li>
+            <li class="mobile-category-item">
+                <a href="#" class="mobile-category-link" data-genre="Gerilim">
+                    <i class="bi bi-eye mobile-category-icon"></i>
+                    Gerilim
+                    <span class="mobile-category-count">89</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="mobile-all-categories">
+            <a href="#" class="mobile-show-all-btn" onclick="showAllCategories()">
+                <i class="bi bi-grid-3x3-gap me-2"></i>
+                Tüm Kategoriler
+            </a>
+        </div>
+    </div>
+</div>
+    
+    
+    
+    
+    
+
+
     
     
     <!-- CONFIG JS -->
