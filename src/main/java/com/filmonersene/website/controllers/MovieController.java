@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.filmonersene.website.dtos.request.SaveMovieRequest;
 import com.filmonersene.website.dtos.response.GetAllMoviesResponse;
 import com.filmonersene.website.dtos.response.GetLatest7MoviesResponse;
+import com.filmonersene.website.dtos.response.GetMostLikedMoviesResponse;
 import com.filmonersene.website.dtos.response.GetMovieDataResponse;
 import com.filmonersene.website.dtos.response.SaveMovieResponse;
 import com.filmonersene.website.entities.Movie;
@@ -80,7 +81,7 @@ public class MovieController {
         return movieService.voteMovie(movieId, userDetails, guestId, false); 
     }
     
-    @GetMapping
+    @GetMapping("/getRecentlyAddedMovies")
     public Page<GetAllMoviesResponse> getAllMoviesSortedByDateDesc(@RequestParam(required = false)String genre,@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "15") int size, 
     		@AuthenticationPrincipal UserDetails userDetails,
     		@CookieValue(value = "guestId", required = false) String guestId)
@@ -92,6 +93,21 @@ public class MovieController {
     	else
     	{
     		return movieService.getAllMoviesSortedByDateDesc(page, size,userDetails,guestId);
+    	}
+    }
+    
+    @GetMapping("/getMostLikedMovies")
+    public Page<GetMostLikedMoviesResponse> getMostLikedMovies(@RequestParam(required = false)String genre,@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "15") int size, 
+    		@AuthenticationPrincipal UserDetails userDetails,
+    		@CookieValue(value = "guestId", required = false) String guestId)
+    {
+    	if(genre != null && !genre.trim().isEmpty())
+    	{
+    		return movieService.getMostLikedMoviesByGenreSortedByLike(genre, page, size,userDetails,guestId);
+    	}
+    	else
+    	{
+    		return movieService.getMostLikedMoviesSortedByLike(page, size,userDetails,guestId);
     	}
     }
     

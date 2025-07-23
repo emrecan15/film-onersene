@@ -47,3 +47,4 @@ com\filmonersene\website\repositories\MovieLikeRepository.class
 com\filmonersene\website\dtos\request\CreateUserRequest.class
 com\filmonersene\website\dtos\request\ChangePasswordRequest.class
 com\filmonersene\website\services\abstracts\MovieService.class
+com\filmonersene\website\dtos\response\GetMostLikedMoviesResponse.class

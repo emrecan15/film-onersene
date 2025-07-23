@@ -78,6 +78,18 @@ public class PageController {
             .body(resource);
     }
 	
+	@GetMapping({"/en-cok-begenilenler"})
+    @ResponseBody
+    public ResponseEntity<Resource> mostLikedMovies() throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:pages/mostLikedMovies.html");
+        if (!resource.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok()
+            .contentType(MediaType.TEXT_HTML)
+            .body(resource);
+    }
+	
 	
 
 }

@@ -15,6 +15,7 @@ C:\Users\emrec\OneDrive\Desktop\backend\website\src\main\java\com\filmonersene\w
 C:\Users\emrec\OneDrive\Desktop\backend\website\src\main\java\com\filmonersene\website\dtos\response\CreateUserResponse.java
 C:\Users\emrec\OneDrive\Desktop\backend\website\src\main\java\com\filmonersene\website\dtos\response\GetAllMoviesResponse.java
 C:\Users\emrec\OneDrive\Desktop\backend\website\src\main\java\com\filmonersene\website\dtos\response\GetLatest7MoviesResponse.java
+C:\Users\emrec\OneDrive\Desktop\backend\website\src\main\java\com\filmonersene\website\dtos\response\GetMostLikedMoviesResponse.java
 C:\Users\emrec\OneDrive\Desktop\backend\website\src\main\java\com\filmonersene\website\dtos\response\GetMovieDataResponse.java
 C:\Users\emrec\OneDrive\Desktop\backend\website\src\main\java\com\filmonersene\website\dtos\response\GetUserInfoResponse.java
 C:\Users\emrec\OneDrive\Desktop\backend\website\src\main\java\com\filmonersene\website\dtos\response\LoginResponse.java

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.filmonersene.website.dtos.request.SaveMovieRequest;
 import com.filmonersene.website.dtos.response.GetAllMoviesResponse;
 import com.filmonersene.website.dtos.response.GetLatest7MoviesResponse;
+import com.filmonersene.website.dtos.response.GetMostLikedMoviesResponse;
 import com.filmonersene.website.dtos.response.GetMovieDataResponse;
 import com.filmonersene.website.dtos.response.SaveMovieResponse;
 import com.filmonersene.website.entities.User;
@@ -20,4 +21,7 @@ public interface MovieService {
 	Page<GetAllMoviesResponse> getAllMoviesSortedByDateDesc(int page,int size,UserDetails userDetails,String guestId);
 	Page<GetAllMoviesResponse> getAllMoviesByGenreSortedByDateDesc(String genre,int page,int size,UserDetails userDetails,String guestId);
 	GetMovieDataResponse getMovieById(Long id,UserDetails userDetails,String guestId);
+	
+	Page<GetMostLikedMoviesResponse> getMostLikedMoviesSortedByLike(int page,int size,UserDetails userDetails,String guestId);
+	Page<GetMostLikedMoviesResponse> getMostLikedMoviesByGenreSortedByLike(String genre,int page,int size,UserDetails userDetails,String guestId);
 }

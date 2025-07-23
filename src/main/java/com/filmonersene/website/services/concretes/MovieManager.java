@@ -22,6 +22,7 @@ import com.filmonersene.website.dtos.request.GenreDTO;
 import com.filmonersene.website.dtos.request.SaveMovieRequest;
 import com.filmonersene.website.dtos.response.GetAllMoviesResponse;
 import com.filmonersene.website.dtos.response.GetLatest7MoviesResponse;
+import com.filmonersene.website.dtos.response.GetMostLikedMoviesResponse;
 import com.filmonersene.website.dtos.response.GetMovieDataResponse;
 import com.filmonersene.website.dtos.response.RecommendedByDto;
 import com.filmonersene.website.dtos.response.SaveMovieResponse;
@@ -231,8 +232,69 @@ public class MovieManager implements MovieService {
 		        movieViewRepository.getTotalViewsByMovieId(movie.getId())
 		    );
 		}
+	
+	
+	private GetMostLikedMoviesResponse convertToDtoGetMostLikedMovies(Movie movie, UserDetails userDetails, String guestId,String paramGenre) {
+		Set<GenreDTO> genres = movie.getGenres().stream()
+		        .map(genre -> new GenreDTO(genre.getTmdbId(), genre.getName()))
+		        .collect(Collectors.toSet());
 
+		    RecommendedByDto recommendedBy = null;
+		    if (movie.getRecommendedBy() != null) {
+		        recommendedBy = new RecommendedByDto(
+		            movie.getRecommendedBy().getId(),
+		            movie.getRecommendedBy().getUsername(),
+		            movie.getRecommendedBy().getTag() != null ? movie.getRecommendedBy().getTag().getName() : null
+		        );
+		    }
 
+		    Double voteAverage = movie.getVoteAverage();
+		    if (voteAverage != null) {
+		        voteAverage = Math.round(voteAverage * 10) / 10.0;
+		    }
+
+		    long likeCount = movieLikeRepository.countByMovieAndLiked(movie, true);
+		    long dislikeCount = movieLikeRepository.countByMovieAndLiked(movie, false);
+
+		    boolean likedByUser = false;
+		    boolean dislikedByUser = false;
+		    System.out.println("UserDetails: " + userDetails);
+		    if (userDetails != null) {
+		        System.out.println("User email: " + userDetails.getUsername());
+
+		        Optional<User> userOpt = userRepository.findByEmail(userDetails.getUsername());
+		        if (userOpt.isPresent()) {
+		            Optional<MovieLike> likeOpt = movieLikeRepository.findByUserAndMovie(userOpt.get(), movie);
+		            System.out.println("likeOpt presence: " + likeOpt.isPresent());
+		            if (likeOpt.isPresent()) {
+		            	System.out.println("User like: " + likeOpt.get().isLiked());
+		                likedByUser = likeOpt.get().isLiked();
+		                dislikedByUser = !likedByUser;
+		            }
+		        }
+		    } else if (guestId != null && !guestId.isBlank()) {
+		        Optional<MovieLike> likeOpt = movieLikeRepository.findByGuestIdAndMovie(guestId, movie);
+		        if (likeOpt.isPresent()) {
+		            likedByUser = likeOpt.get().isLiked();
+		            dislikedByUser = !likedByUser;
+		        }
+		    }
+		    
+		    
+		    return new GetMostLikedMoviesResponse(
+		        movie.getId(),
+		        movie.getPosterUrl(),
+		        movie.getMovieName(),
+		        voteAverage,
+		        genres,
+		        recommendedBy,
+		        (int) likeCount,
+		        (int) dislikeCount,
+		        likedByUser,
+		        dislikedByUser,
+		        movieViewRepository.getTotalViewsByMovieId(movie.getId())
+		    );
+	}
 
 	@Override
 	public ResponseEntity<?> voteMovie(Long movieId, UserDetails userDetails, String guestId, boolean isLike) {
@@ -503,6 +565,27 @@ public class MovieManager implements MovieService {
 				movie.getDescription(),
 				recommenderComment
 				);
+	}
+
+
+	@Override
+	public Page<GetMostLikedMoviesResponse> getMostLikedMoviesSortedByLike(int page, int size, UserDetails userDetails,
+			String guestId) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+	    Page<Movie> moviePage = movieRepository.findMostLikedMoviesNative(pageable);
+
+	    return moviePage.map(movie -> convertToDtoGetMostLikedMovies(movie, userDetails, guestId, null));
+	}
+
+
+	@Override
+	public Page<GetMostLikedMoviesResponse> getMostLikedMoviesByGenreSortedByLike(String genre, int page, int size,
+			UserDetails userDetails, String guestId) {
+		Pageable pageable = PageRequest.of(page, size);
+	    Page<Movie> moviePage = movieRepository.findMostLikedMoviesByGenre(genre, pageable);
+
+	    return moviePage.map(movie -> convertToDtoGetMostLikedMovies(movie, userDetails, guestId, genre));
 	}
 	
 	

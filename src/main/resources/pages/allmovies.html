@@ -23,12 +23,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="#">Tüm Filmler</a>
+                <a class="nav-link active text-white" aria-current="page" href="/tum-filmler">Tüm Filmler</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link active text-white" aria-current="page" href="#">En Çok Beğenilenler</a>
+                <a class="nav-link active text-white" aria-current="page" href="/en-cok-begenilenler">En Çok Beğenilenler</a>
                 </li>
             </ul>
+            
+            <div class="film-oner mt-2 align-items-center me-2">
+            	<button class="btn btn-md btnBrowse rounded-pill text-white" id="filmOnerBtn">
+		        <i class="bi bi-file-plus me-2"></i>
+		        Film Öner
+		      	</button>
+            </div>
             
             <form class="d-flex align-items-center mt-2">
                 <input class="form-control me-5 bg-dark text-white rounded-pill search-input" type="search" placeholder="Film Ara..." aria-label="Search">
@@ -45,7 +52,7 @@
         </div>
     </nav>
 
-    <section class="movies">
+    <section class="movies pb-5">
         <div class="container">
         	<div class="row mb-2">
         		<!-- Mevcut search form'dan ÖNCE bu kodu ekleyin -->
@@ -166,8 +173,179 @@
         </div>
     </section>
 
+	
+	
+	<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-gradient-overlay"></div>
+    <div class="container">
+        <div class="row py-5">
+            <!-- Logo ve Açıklama -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="footer-brand">
+                    <h4 class="footer-logo">
+                        <i class="bi bi-film me-2"></i>
+                        filmonersene.com
+                    </h4>
+                    <p class="footer-description">
+                        Topluluk tarafından önerilen en iyi filmleri keşfedin ve kendi önerilerinizi paylaşın. 
+                        Film severlerin buluşma noktası.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
 
-    
+            <!-- Hızlı Linkler -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="footer-title">Keşfet</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Tüm Filmler</a></li>
+                    <li><a href="#">En Çok Beğenilenler</a></li>
+                    <li><a href="#">Yeni Eklenenler</a></li>
+                    <li><a href="#">Kategoriler</a></li>
+                    <li><a href="#">Top 100</a></li>
+                </ul>
+            </div>
+
+            <!-- Topluluk -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="footer-title">Topluluk</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Film Öner</a></li>
+                    <li><a href="#">Yorumlar</a></li>
+                    <li><a href="#">Listeler</a></li>
+                    <li><a href="#">Kullanıcılar</a></li>
+                    <li><a href="#">Forum</a></li>
+                </ul>
+            </div>
+
+            <!-- Destek -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="footer-title">Destek</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Yardım Merkezi</a></li>
+                    <li><a href="#">İletişim</a></li>
+                    <li><a href="#">Geri Bildirim</a></li>
+                    <li><a href="#">SSS</a></li>
+                </ul>
+            </div>
+
+            <!-- TMDB Attribution -->
+            <div class="col-lg-2 col-md-12 mb-4">
+                <h5 class="footer-title">Veri Kaynağı</h5>
+                <div class="tmdb-attribution">
+                    <a href="https://www.themoviedb.org/" target="_blank" class="tmdb-link">
+                        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" 
+                             alt="TMDB" class="tmdb-logo">
+                        <span class="tmdb-text">
+                            Film verileri<br>
+                            <strong>TMDB</strong> tarafından<br>
+                            sağlanmaktadır
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        
+		
+    </div>
+</footer>
+
+<!-- Alt Footer -->
+		<div class="footer-bottom">
+		    <div class="container">
+		        <div class="row align-items-center py-3">
+		            <div class="col-md-6">
+		                <p class="footer-copyright">
+		                    © 2025 filmonersene.com - Tüm hakları saklıdır
+		                </p>
+		            </div>
+		            <div class="col-md-6">
+		                <div class="footer-legal">
+		                    <a href="#" class="legal-link">Gizlilik Politikası</a>
+		                    <a href="#" class="legal-link">Kullanım Koşulları</a>
+		                    <a href="#" class="legal-link" data-bs-toggle="modal" data-bs-target="#copyrightModal">Telif Hakkı</a>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		
+		
+		
+		
+		
+
+<!-- Telif Hakkı Modal -->
+<div class="modal fade" id="copyrightModal" tabindex="-1" aria-labelledby="copyrightModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content copyright-modal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="copyrightModalLabel">
+                    <i class="bi bi-shield-check me-2"></i>
+                    Telif Hakkı Bildirimi
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="copyright-content">
+                    <h6><i class="bi bi-info-circle me-2"></i>Önemli Bilgilendirme</h6>
+                    <p>
+                        Bu sitede yer alan film posterleri, açıklamaları ve diğer görsel materyaller 
+                        <strong>The Movie Database (TMDB)</strong> tarafından sağlandırıp, telif hakları 
+                        ilgili yapım şirketlerine aittir.
+                    </p>
+                    
+                    <h6><i class="bi bi-exclamation-triangle me-2"></i>Telif Hakkı İhlali Bildirimi</h6>
+                    <p>
+                        Eğer sitemizdeki herhangi bir içeriğin telif haklarınızı ihlal ettiğini düşünüyorsanız, 
+                        lütfen aşağıdaki bilgilerle birlikte bizimle iletişime geçin:
+                    </p>
+                    
+                    <ul class="copyright-list">
+                        <li>Telif hakkı sahibi olduğunuza dair kanıt</li>
+                        <li>İhlal edilen içeriğin detaylı açıklaması</li>
+                        <li>İhlal edilen içeriğin site üzerindeki konumu</li>
+                        <li>İletişim bilgileriniz</li>
+                    </ul>
+                    
+                    <div class="contact-info">
+                        <h6><i class="bi bi-envelope me-2"></i>İletişim</h6>
+                        <p>
+                            <strong>E-posta:</strong> telif@filmonersene.com<br>
+                            <strong>Konu:</strong> "Telif Hakkı İhlali Bildirimi"
+                        </p>
+                    </div>
+                    
+                    <div class="response-time">
+                        <small class="text-muted">
+                            <i class="bi bi-clock me-1"></i>
+                            Telif hakkı bildirimleriniz 48 saat içerisinde değerlendirilecektir.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+	
+
+
+
+
+
+
+
+
+
+    <!-- MODAL ADD MOVİE - film oneri -->
+<div id="modalContainer"></div>
     
       <!-- Login/Register Modal -->
     <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
@@ -405,9 +583,8 @@
 
     <script src="js/allMovies.js"></script>
     <script src="js/api.js"></script>
-    <script src="js/movieCard.js"></script>
+    
     <!-- jQuery (Modalı yüklemek için) -->
-    <script type="text/javascript" src="js/allMovies.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- BOOTSTRAP JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

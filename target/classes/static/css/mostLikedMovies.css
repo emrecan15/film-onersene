@@ -1,0 +1,369 @@
+body{
+    background: linear-gradient(
+            120deg,
+            hsl(270deg 100% 2%) 0%,
+            hsl(270deg 98% 3%) 8%,
+            hsl(271deg 95% 4%) 17%,
+            hsl(271deg 93% 6%) 25%,
+            hsl(271deg 94% 8%) 33%,
+            hsl(271deg 95% 10%) 42%,
+            hsl(272deg 97% 12%) 50%,
+            hsl(271deg 95% 10%) 58%,
+            hsl(271deg 94% 8%) 67%,
+            hsl(271deg 93% 6%) 75%,
+            hsl(271deg 95% 4%) 83%,
+            hsl(270deg 98% 3%) 92%,
+            hsl(270deg 100% 2%) 100%
+        );
+        min-height: 100vh;
+        padding-top: 70px;
+}
+
+.category-menu {
+            background: rgba(26, 26, 46, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 70px;
+        }
+
+        .category-title {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #8a2be2, #9d4edd);
+            border-radius: 2px;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-item {
+            margin-bottom: 8px;
+        }
+
+        .category-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 18px;
+            color: #b8b8b8;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+            font-size: 0.95rem;
+            overflow: hidden;
+        }
+
+        .category-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(157, 78, 221, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-link:hover::before {
+            left: 100%;
+        }
+
+        .category-link:hover {
+            color: #ffffff;
+            background: rgba(138, 43, 226, 0.15);
+            transform: translateX(8px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+        }
+
+        .category-link.active {
+            color: #ffffff;
+            background: linear-gradient(135deg, #8a2be2, #9d4edd);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.3);
+            font-weight: 600;
+        }
+
+        .category-icon {
+            margin-right: 12px;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .category-count {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .category-link:hover .category-count,
+        .category-link.active .category-count {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .all-categories {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .show-all-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: rgba(138, 43, 226, 0.1);
+            color: #8a2be2;
+            text-decoration: none;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .show-all-btn:hover {
+            background: rgba(138, 43, 226, 0.2);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+        }
+		
+        /* Responsive */
+        @media (max-width: 992px) {
+            .category-menu {
+                margin-bottom: 30px;
+                position: relative;
+                top: 0;
+            }
+        }
+		
+
+        /* test hamb. category */
+        
+    	/* Mobile Category Offcanvas Styles */
+.mobile-category-offcanvas {
+    background: linear-gradient(
+        135deg,
+        hsl(270deg 100% 2%) 0%,
+        hsl(271deg 95% 4%) 50%,
+        hsl(270deg 100% 2%) 100%
+    );
+    border-right: 1px solid rgba(138, 43, 226, 0.3);
+    width: 300px !important;
+}
+
+.mobile-category-header {
+    background: rgba(26, 26, 46, 0.95);
+    border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+    padding: 20px;
+}
+
+.mobile-category-title {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.mobile-category-close {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mobile-category-close:hover {
+    background: rgba(138, 43, 226, 0.2);
+    color: #8a2be2;
+}
+
+.mobile-category-body {
+    padding: 20px;
+}
+
+.mobile-category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-category-item {
+    margin-bottom: 8px;
+}
+
+.mobile-category-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 18px;
+    color: #b8b8b8;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+    font-size: 1rem;
+    overflow: hidden;
+}
+
+.mobile-category-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(157, 78, 221, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.mobile-category-link:hover::before {
+    left: 100%;
+}
+
+.mobile-category-link:hover {
+    color: #ffffff;
+    background: rgba(138, 43, 226, 0.15);
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+}
+
+.mobile-category-link.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, #8a2be2, #9d4edd);
+    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.3);
+    font-weight: 600;
+}
+
+.mobile-category-icon {
+    margin-right: 15px;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+.mobile-category-count {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    min-width: 35px;
+    text-align: center;
+}
+
+.mobile-category-link:hover .mobile-category-count,
+.mobile-category-link.active .mobile-category-count {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-all-categories {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-show-all-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: rgba(138, 43, 226, 0.1);
+    color: #8a2be2;
+    text-decoration: none;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+.mobile-show-all-btn:hover {
+    background: rgba(138, 43, 226, 0.2);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+}
+
+/* Offcanvas backdrop customization */
+.offcanvas-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+/* CATEGORIES */ 
+
+/* Responsive Category Menu Controls */
+@media (min-width: 992px) {
+    /* Desktop: Normal kategori menüsünü göster, mobile butonunu gizle */
+    .category-menu {
+        display: block !important;
+    }
+    
+    /* Mobile kategori butonunu gizle */
+    .mobile-category-btn {
+        display: none !important;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .category-menu {
+        display: none !important;
+    }
+    
+}
+
+/* Mobile kategori butonu için ekstra stil */
+.mobile-category-btn {
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.mobile-category-btn:hover {
+    background: rgba(138, 43, 226, 0.2) !important;
+    border-color: rgba(138, 43, 226, 0.5) !important;
+    transform: translateY(-1px);
+}
+
+/* Offcanvas animasyon iyileştirmeleri */
+.mobile-category-offcanvas.show {
+    transform: translateX(0) !important;
+}
+
+.mobile-category-offcanvas {
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s ease-in-out !important;
+}   
+        
+

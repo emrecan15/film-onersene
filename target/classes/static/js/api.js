@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
+
+
 async function checkAuthStatus() {
     try {
         const res = await fetch(`${API_BASE_URL}/auth/status`, {
@@ -30,6 +32,18 @@ async function checkAuthStatus() {
         buildNavbar({ authenticated: false }); // Hata durumunda
     }
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    $("#modalContainer").load("/film-oner", function (response, status, xhr) {
+        if (status === "success") {
+            console.log("Modal başarıyla yüklendi.");
+            window.filmOneriSistemi = new FilmOneriSistemi(); // Modal yüklendikten sonra başlat
+        } else {
+            console.error("Modal yüklenemedi:", status, xhr.status, xhr.statusText);
+        }
+    });
+});
 /*
 function buildNavbar(user) {
   const authDiv = document.getElementById('authButtons');
@@ -337,7 +351,37 @@ document.getElementById('filmOnerBtn').addEventListener('click', async () => {
   }
 });
 
+// Film öneri butonu kodu
+document.getElementById('filmOnerBtnHead').addEventListener('click', async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/status`, {
+      method: 'GET',
+      credentials: 'include', 
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
+
+     if (!response.ok) {
+      console.log("Kullanıcı authenticated değil, auth modal açılıyor");
+      new bootstrap.Modal(document.getElementById('authModal')).show();
+      return;
+    }
+
+
+    const data = await response.json();
+    console.log("API Yanıtı:", data); // Yanıtı konsolda kontrol edin
+    
+    if (data.authenticated) {
+      new bootstrap.Modal(document.getElementById('filmOneriModal')).show();
+    } else {
+      new bootstrap.Modal(document.getElementById('authModal')).show();
+    }
+  } catch (err) {
+    console.error('Hata:', err);
+  }
+});
 
 
 

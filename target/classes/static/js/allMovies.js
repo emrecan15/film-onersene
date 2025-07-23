@@ -1,6 +1,6 @@
 class MoviePagination {
     constructor(config = {}) {
-        this.apiEndpoint = config.apiEndpoint || `${API_BASE_URL}/movies`;
+        this.apiEndpoint = config.apiEndpoint || `${API_BASE_URL}/movies/getRecentlyAddedMovies`;
         this.containerSelector = config.containerSelector || '.allmovies-grid';
         this.paginationSelector = config.paginationSelector || '.pagination-container';
         this.currentPage = 0;
@@ -668,7 +668,7 @@ let moviePagination;
 // Sayfa yüklendiğinde başlat
 document.addEventListener('DOMContentLoaded', function() {
     moviePagination = new MoviePagination({
-        apiEndpoint: `${API_BASE_URL}/movies`, // API endpoint'inizi buraya yazın
+        apiEndpoint: `${API_BASE_URL}/movies/getRecentlyAddedMovies`, // API endpoint'inizi buraya yazın
         containerSelector: '.allmovies-grid',
         paginationSelector: '.pagination-container',
         pageSize: 15

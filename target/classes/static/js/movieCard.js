@@ -1,4 +1,5 @@
-// movieCard.js
+// movieCard.js for allmovies page
+
 
 function createMovieCard(movie) {
   return `
@@ -59,6 +60,7 @@ function createMovieCard(movie) {
   `;
 }
 
+/* this function is working on index.html getLatest7movies */
 async function fetchAndRenderMovies() {
   try {
     const response = await fetch(`${API_BASE_URL}/movies/recent`,{credentials: 'include'});

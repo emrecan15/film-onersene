@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -67,7 +66,8 @@ public class SecurityConfig {
             		.requestMatchers(
             				"/", 
             	            "/anasayfa", 
-            	            "/tum-filmler", 
+            	            "/tum-filmler",
+            	            "/en-cok-begenilenler",
             	            "/film-detay", 
             	            "/profil", 
             	            "/film-oner",
@@ -85,7 +85,8 @@ public class SecurityConfig {
             	            "/api/movies/recent",
             	            "/api/movies/*/like",
             	            "/api/movies/*/dislike",
-            	            "/api/movies"
+            	            "/api/movies/getRecentlyAddedMovies",
+            	            "/api/movies/getMostLikedMovies"
             	        ).permitAll()
                 .anyRequest().authenticated()
             )

@@ -21,6 +21,37 @@ public interface MovieRepository extends JpaRepository<Movie, Long>{
 	@Query("SELECT m.userComment FROM Movie m WHERE m.recommendedBy.id = :userId AND m.id = :id")
     String findUserCommentByUserIdAndMovieId(@Param("userId") Long userId, @Param("id") Long id);
 	
+	@Query(value = """
+		    SELECT m.* FROM movies m
+		    LEFT JOIN movie_likes ml ON m.id = ml.movie_id AND ml.liked = true
+		    GROUP BY m.id
+		    ORDER BY COUNT(ml.id) DESC
+		    """,
+		    countQuery = "SELECT COUNT(*) FROM movies",
+		    nativeQuery = true)
+		Page<Movie> findMostLikedMoviesNative(Pageable pageable);
+
+
+	
+	@Query(value = """
+		    SELECT m.* FROM movies m
+		    JOIN movie_genres mg ON m.id = mg.movie_id
+		    JOIN genres g ON g.id = mg.genre_id
+		    LEFT JOIN movie_likes ml ON m.id = ml.movie_id AND ml.liked = true
+		    WHERE g.name = :genre
+		    GROUP BY m.id
+		    ORDER BY COUNT(ml.id) DESC
+		    """,
+		    countQuery = """
+		    SELECT COUNT(DISTINCT m.id)
+		    FROM movies m
+		    JOIN movie_genres mg ON m.id = mg.movie_id
+		    JOIN genres g ON g.id = mg.genre_id
+		    WHERE g.name = :genre
+		    """,
+		    nativeQuery = true)
+		Page<Movie> findMostLikedMoviesByGenre(@Param("genre") String genre, Pageable pageable);
+
 	
 
 }
